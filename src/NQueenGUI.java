@@ -1,5 +1,4 @@
-// Lab 6: NQueen Problem in JavaFX
-// Class NQueenGUI
+// NQueen Problem in JavaFX
 // Davis Insua
 
 import javafx.application.Application;
