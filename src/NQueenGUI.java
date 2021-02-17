@@ -1,22 +1,14 @@
-// Lab 6: NQueen Problem in JavaFX
+// NQueen Problem in JavaFX
 // Class NQueenGUI
 // Davis Insua
 
 import javafx.application.Application;
-import javafx.event.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.paint.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.text.*;
-import javafx.scene.control.Alert.AlertType;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.lang.Math;
 import javafx.geometry.*;
 import java.util.ArrayList;
 
@@ -84,13 +76,14 @@ class SolveWindow extends Stage
    // SolveWindow constructor
    public SolveWindow(int N)
    {
-      // Update N with passed value
+      // Update N with passed value, define range variable
       this.N = N;
-      
+      boolean in_range = true;
+
       // Create stage, options
       Stage solveWindow = new Stage();
       solveWindow.setTitle("Solve "+N+" "+"x "+N+" Queen Problem");
-      solveWindow.setResizable(false);
+      solveWindow.setResizable(true);
       
       // Create an Arraylist to hold all board/grid button elements.
       ArrayList<Button> gridElements = new ArrayList<Button>(N * N);
@@ -99,8 +92,8 @@ class SolveWindow extends Stage
       GridPane answerBoard = new GridPane();
       answerBoard.setAlignment(Pos.CENTER);
       
-      // Create board for solver code
-      int[][] boardInt = new int[N][N];
+      // Create board for solver code, use abs to handle negative number error
+      int[][] boardInt = new int[Math.abs(N)][Math.abs(N)];
       
       // Create GUI buttons for solverWindow
       Button close = new Button("Close");
@@ -110,9 +103,10 @@ class SolveWindow extends Stage
       close.setOnAction(e->solveWindow.close());
       
       // if statement to not allow numbers not in range.
-      if (N < 2 || N > 20)
+      if (N < 2 || N > 20 || N < 0)
       {
          solution.setText("Number not in range!");
+         in_range = false;
       }
       
       // if the number is in range, this else statement will run
@@ -165,10 +159,17 @@ class SolveWindow extends Stage
       // Create layout
       VBox vBox = new VBox();
       vBox.setAlignment(Pos.CENTER);
+      vBox.setSpacing(5);
       vBox.getChildren().addAll(solution,answerBoard,close);
 
+      // Set adaptive window size
+       int w_size = 110;
+       // For sizes of N greater than 3, the window size will adapt to the N size.
+       if(N > 3 && in_range)
+           w_size = N * 40;
+
       // Create scene, using ternary operator to increase window size for larger values of N
-      Scene scene = new Scene(vBox, (N > 12) ? 580 : 400, (N > 12) ? 580 : 400);
+      Scene scene = new Scene(vBox, w_size,  w_size);
       solveWindow.setScene(scene);
       solveWindow.show();
    }
