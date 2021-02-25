@@ -12,7 +12,7 @@ USAGE
 
 The application is used by typing in the desired square chessboard size N into the text field, clicking solve, and viewing the output.
 
-DEMO ANIMATIONS  
+DEMO  
 ----------------
 
 ![](demos/Success.gif)
