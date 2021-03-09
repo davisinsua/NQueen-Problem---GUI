@@ -15,6 +15,8 @@ The application is used by typing in the desired square chessboard size N into t
 DEMO  
 ----------------
 
+Below are demo animations showing regular use of the program.
+
 ![](demos/Success.gif)
 
 Demo of inputting valid entries into the application (numbers in range).
